@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 import { categories } from "../utils/constants";
 
-const SideBar = ( selectedCategory, setSelectedCategory) => {
+const SideBar = ( { selectedCategory, setSelectedCategory }) => {
   return (
     <Stack
       direction='row'
@@ -27,9 +27,7 @@ const SideBar = ( selectedCategory, setSelectedCategory) => {
           >
             {category.icon}
           </span>
-          <span
-           
-          >{category.name}</span>
+          <span>{category.name}</span>
         </button>
       ))}
 

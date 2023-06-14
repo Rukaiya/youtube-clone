@@ -17,21 +17,27 @@ const options = {
 };
 
 
-export const fetchFromAPI = async (url, retryAttempts = 0) => {
-  try {
-    const { data } = await axios.get(`${BASE_URL}/${url}`, options);
-    return data;
-  } catch (error) {
-    if (error.response && error.response.status === 429) {
-      if (retryAttempts < MAX_RETRY_ATTEMPTS) {
-        // Retry the request after a delay
-        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
-        return fetchFromAPI(url, retryAttempts + 1);
-      } else {
-        throw new Error('Too many requests. Please try again later.');
-      }
-    } else {
-      throw new Error('Error fetching data:', error);
-    }
-  }
+// export const fetchFromAPI = async (url, retryAttempts = 0) => {
+//   try {
+//     const { data } = await axios.get(`${BASE_URL}/${url}`, options);
+//     return data;
+//   } catch (error) {
+//     if (error.response && error.response.status === 429) {
+//       if (retryAttempts < MAX_RETRY_ATTEMPTS) {
+//         // Retry the request after a delay
+//         await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
+//         return fetchFromAPI(url, retryAttempts + 1);
+//       } else {
+//         throw new Error('Too many requests. Please try again later.');
+//       }
+//     } else {
+//       throw new Error('Error fetching data:', error);
+//     }
+//   }
+// };
+
+export const fetchFromAPI = async (url) => {
+  const { data } = await axios.get(`${BASE_URL}/${url}`, options);
+
+  return data;
 };
